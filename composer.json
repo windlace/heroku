@@ -1,0 +1,22 @@
+{
+    "name": "cast/heroku",
+    "description": "For Laravel on Heroku.",
+    "type": "library",
+    "keywords": ["laravel","heroku"],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cast\\Heroku\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cast\\Heroku\\HerokuServiceProvider"
+            ]
+        }
+    }
+}
