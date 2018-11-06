@@ -13,8 +13,22 @@ class HerokuServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // use the vendor configuration file as fallback
-        $this->mergeConfigFrom(__DIR__.'/config/database.php', 'database');
+        $this->connectJawsDbFromEnv();
+    }
+
+    public function connectJawsDbFromEnv()
+    {
+        if (!env('JAWSDB_URL')) {
+            return;
+        }
+
+        $JawsDB = parse_url(env('JAWSDB_URL'));
+
+        config(['database.connections.mysql.host'     => $JawsDB['host']]);
+        config(['database.connections.mysql.port'     => $JawsDB['port']]);
+        config(['database.connections.mysql.username' => $JawsDB['user']]);
+        config(['database.connections.mysql.password' => $JawsDB['pass']]);
+        config(['database.connections.mysql.database' => ltrim($JawsDB['path'], '/')]);
     }
 
     /**
